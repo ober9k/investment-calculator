@@ -16,10 +16,20 @@ import { UserInputData } from "./user-input/user-input.model";
 })
 export class AppComponent {
 
-  protected userInputData = signal<UserInputData | undefined>(undefined);
+  protected investmentResultsShown = signal<boolean>(false);
+
+  protected userInputData = signal<UserInputData>({
+    initialInvestment: 0,
+    annualInvestment: 0,
+    expectedReturn: 5,
+    duration: 10,
+  });
 
   public onSubmitData(userInputData: UserInputData) {
+    console.log('x1', userInputData);
     this.userInputData.set(userInputData);
+    console.log('x2', this.userInputData());
+    this.investmentResultsShown.set(userInputData.duration > 0);
   }
 
 }

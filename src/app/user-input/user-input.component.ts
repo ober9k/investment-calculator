@@ -14,10 +14,10 @@ export class UserInputComponent {
   @Output()
   public submitData = new EventEmitter<UserInputData>();
 
-  protected enteredInitialInvestment: string = '';
-  protected enteredAnnualInvestment: string = '';
-  protected enteredExpectedReturn: string = '';
-  protected enteredDuration: string = '';
+  protected enteredInitialInvestment: string = '0';
+  protected enteredAnnualInvestment: string = '0';
+  protected enteredExpectedReturn: string = '5';
+  protected enteredDuration: string = '10';
 
   public onSubmit() {
     this.submitData.emit({

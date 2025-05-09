@@ -1,18 +1,29 @@
-import { Component, Input } from '@angular/core';
+import { CurrencyPipe } from "@angular/common";
+import { Component, input } from '@angular/core';
+import { calculateInvestmentResults } from "../../investment-results";
 import { UserInputData } from "../user-input/user-input.model";
 
 @Component({
   selector: 'app-investment-results',
   standalone: true,
-  imports: [],
+  imports: [CurrencyPipe],
   templateUrl: './investment-results.component.html',
   styleUrl: './investment-results.component.css'
 })
 export class InvestmentResultsComponent {
 
-  @Input({
-    required: true,
-  })
-  public userInputData!: UserInputData;
+  public userInputData = input.required<UserInputData>();
+
+  get investmentResults(): Array<{
+    year: number,
+    interest: number,
+    valueEndOfYear: number,
+    annualInvestment: number,
+    totalInterest: number,
+    totalAmountInvested: number,
+  }> {
+    const { initialInvestment, annualInvestment, expectedReturn, duration } = this.userInputData();
+    return calculateInvestmentResults(initialInvestment, annualInvestment, expectedReturn, duration);
+  }
 
 }
